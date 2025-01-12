@@ -31,13 +31,37 @@ class Category(models.Model):
     def __str__(self):
         return self.CategoryName 
 
-class tblProducts(models.Model):
-    productName = models.CharField(max_length=200, null=True)
+class tblFoodMenu(models.Model):
+    foodName = models.CharField(max_length=200, null=True)
     categoryID = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     quantity = models.CharField(max_length=200, null=True)
     priceOut = models.CharField(max_length=200, null=True)
     description = models.CharField(max_length=200, null=True)
-    productImage =  models.ImageField(upload_to ='ProductImages/')
-    productDate = models.DateTimeField(auto_now_add=True, null=True)
+    foodImage =  models.ImageField(upload_to ='FoodMenuImages/')
+    foodDate = models.DateTimeField(auto_now_add=True, null=True)
     def __str__(self):         
-        return self.productName  
+        return self.foodName  
+    
+class tblAboutUs(models.Model):
+    aboutUsName = models.CharField(max_length=200, null=True)
+    aboutUsImage = models.ImageField(upload_to ='AboutUsImages/')
+    videoImage = models.ImageField(upload_to ='AboutUsImages/')
+    phoneNumber = models.CharField(max_length=15, null=True)
+    advan1 = models.CharField(max_length=200, null=True)
+    advan2 = models.CharField(max_length=200, null=True)
+    advan3 = models.CharField(max_length=200, null=True)
+    description = models.CharField(max_length=200, null=True)
+    aboutDate = models.DateTimeField(auto_now_add=True, null=True)
+    def __str__(self):         
+        return self.aboutUsName  
+
+
+class tblEnventCatalog(models.Model):
+    catalogName = models.CharField(max_length=200, null=True)
+    catalogPrice = models.CharField(max_length=200, null=True)
+    catalogImage = models.ImageField(upload_to ='CatalogImages/')
+    phoneNumber = models.CharField(max_length=15, null=True)
+    description = models.CharField(max_length=200, null=True)
+    catalogDate = models.DateTimeField(auto_now_add=True, null=True)
+    def __str__(self):         
+        return self.catalogName  
