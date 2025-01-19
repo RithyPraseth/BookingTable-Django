@@ -6,9 +6,6 @@ from .models import *
 def home(request):
     return HttpResponse('Home_page')
 
-def products(request):
-    return HttpResponse('Products_page')
-
 def customer(request):
     return HttpResponse('Customer_page')
 
@@ -16,10 +13,14 @@ def Index(request):
     TopMenu = tblTopMenu.objects.all()
     SubTopMenu = tblSubTopMenu.objects.all()
     Sub2TopMenu = tblSub2TopMenu.objects.all()
+    category = Category.objects.all()
+    Menu = tblFoodMenu.objects.all()
     context ={
         'TopMenus' : TopMenu,
         'SubTopMenus' : SubTopMenu,
-        'Sub2TopMenus' : Sub2TopMenu
-        
+        'Sub2TopMenus' : Sub2TopMenu,
+        'FoodCategory' : category,
+        'FoodMenu' : Menu        
     }
     return render(request, 'accounts/index.html', context)
+    

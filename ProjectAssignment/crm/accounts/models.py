@@ -28,17 +28,18 @@ class Category(models.Model):
     CategoryName = models.CharField(max_length=200, null=True) 
     CategoryImage =  models.ImageField(upload_to ='CategoryImages/')
     created_date = models.DateTimeField(auto_now_add=True, null=True)
+    status = models.CharField(max_length=20, null=True)
     def __str__(self):
         return self.CategoryName 
 
 class tblFoodMenu(models.Model):
     foodName = models.CharField(max_length=200, null=True)
     categoryID = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    quantity = models.CharField(max_length=200, null=True)
     priceOut = models.CharField(max_length=200, null=True)
     description = models.CharField(max_length=200, null=True)
     foodImage =  models.ImageField(upload_to ='FoodMenuImages/')
     foodDate = models.DateTimeField(auto_now_add=True, null=True)
+    status = models.CharField(max_length=20, null=True)
     def __str__(self):         
         return self.foodName  
     

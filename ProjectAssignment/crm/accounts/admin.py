@@ -8,7 +8,7 @@ admin.site.index_title = "Booking Table Restaurant Admin Panel"
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["foodName","image_preview","categoryID","foodDate"]
+    list_display = ["foodName","image_preview","categoryID","foodDate","status"]
     list_filter = ["foodDate"]
     search_fields = ["foodName"]
     date_hierarchy = "foodDate"
