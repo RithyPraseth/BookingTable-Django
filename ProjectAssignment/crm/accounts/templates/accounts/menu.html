@@ -1,46 +1,53 @@
 {% load static %}
+<!-- Menu Section -->
 <section id="menu" class="menu section">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Our Menu</h2>
+    <p><span>Check Our</span> <span class="description-title">Yummy Menu</span></p>
+  </div>
 
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-      <h2>Our Menu</h2>
-      <p><span>Check Our</span> <span class="description-title">Yummy Menu</span></p>
-    </div><!-- End Section Title -->
+  <div class="container">
+    <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+      <!-- Loop through Categories -->
+      {% for category in FoodCategory %}
+        <li class="nav-item">
+          <a class="nav-link {% if forloop.first %}active show{% endif %}" data-bs-toggle="tab" data-bs-target="#menu-{{ category.id }}">
+            <h4>{{ category.CategoryName }}</h4>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
 
-    <div class="container">
-      <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
-        {% for FoodCategories in FoodCategory %}
-          <li class="nav-item">
-            <a class="nav-link {{FoodCategories.status}} show" data-bs-toggle="tab" data-bs-target="#menu-{{FoodCategories.CategoryName}}">
-              <h4>{{FoodCategories.CategoryName}}</h4>
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-      <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
-        {% for FoodMenus in FoodMenu %}
-        <div class="tab-pane fade {{FoodMenus.status}} show" id="menu-{{FoodMenus.categoryID}}">
+    <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+      <!-- Loop through Categories for Tab Content -->
+      {% for category in FoodCategory %}
+        <div class="tab-pane fade {% if forloop.first %}active show{% endif %}" id="menu-{{ category.id }}">
           <div class="tab-header text-center">
             <p>Menu</p>
-            <h3>{{FoodMenus.categoryID}}</h3>
+            <h3>{{ category.CategoryName }}</h3>
           </div>
-          
           <div class="row gy-5">
-              <div class="col-lg-4 menu-item filter-{{FoodMenus.categoryID}}">
-                <a  class="glightbox">
-                  <img src="{% static FoodMenus.foodImage %}" class="menu-img img-fluid" alt="">
-                </a>
-                <h4>{{FoodMenus.foodName}}</h4>
-                <p class="ingredients">
-                  {{FoodMenus.description}}
-                </p>
-                <p class="price">
-                  ${{FoodMenus.priceOut}}
-                </p>
-              </div>
-            </div>
+            <!-- Loop through Food Menu Items -->
+            {% for menu in FoodMenu %}
+              {% if menu.categoryID.id == category.id %}
+                <div class="col-lg-4 menu-item">
+                  <a href="{{ menu.foodImage.url }}" class="glightbox">
+                    <img src="{{ menu.foodImage.url }}" class="menu-img img-fluid" alt="{{ menu.foodName }}">
+                  </a>
+                  <h4>{{ menu.foodName }}</h4>
+                  <p class="ingredients">
+                    {{ menu.description }}
+                  </p>
+                  <p class="price">
+                    ${{ menu.priceOut }}
+                  </p>
+                </div>
+              {% endif %}
+            {% endfor %}
           </div>
-          {% endfor %}
-      </div>
+        </div>
+      {% endfor %}
     </div>
-  </section>
+  </div>
+</section>

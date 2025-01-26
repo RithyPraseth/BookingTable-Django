@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import *
 from django.utils.html import format_html
+from django import forms
 # Register your models here.
 admin.site.site_header = "Booking Table Restaurant"
 admin.site.site_title = "Booking Table Restaurant Admin Panel"
@@ -35,6 +36,20 @@ class CatalogAdmin(admin.ModelAdmin):
 
     image_preview.short_description = 'Image Preview'
 
+# class BookTableAdmin(admin.ModelAdmin):
+#     list_display = ["custName","email","phoneNumber","bookDate","bookTime","noPeople","description"]
+#     list_filter = ["bookDate"]
+#     search_fields = ["custName"]
+#     date_hierarchy = "bookDate"
+
+class tblBookTableAdminForm(forms.ModelForm):
+    class Meta:
+        model = tblBookTable
+        fields = '__all__'
+        widgets = {
+            'bookTime': forms.TimeInput(attrs={'type': 'time'}),
+        }
+
 admin.site.register(Category)
 admin.site.register(tblFoodMenu, ProductAdmin)
 admin.site.register(tblTopMenu)
@@ -42,5 +57,12 @@ admin.site.register(tblSub2TopMenu)
 admin.site.register(tblSubTopMenu)
 admin.site.register(tblAboutUs)
 admin.site.register(tblEnventCatalog, CatalogAdmin)
-admin.site.register(tblBookTable)
 admin.site.register(tblSlide)
+@admin.register(tblBookTable)
+class tblBookTableAdmin(admin.ModelAdmin):
+    form = tblBookTableAdminForm
+    list_display = ["custName", "email", "phoneNumber", "bookDate", "bookTime", "noPeople", "description"]
+    list_filter = ["bookDate", "bookTime", "noPeople"]
+    search_fields = ["custName", "email", "phoneNumber"]
+    date_hierarchy = "bookDate"
+    ordering = ["-bookDate"]

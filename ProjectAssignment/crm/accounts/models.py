@@ -71,8 +71,8 @@ class tblBookTable(models.Model):
     custName = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
     phoneNumber = models.CharField(max_length=15, null=True)
-    bookDate = models.DateTimeField(auto_now_add=True, null=True)
-    bookTime = models.TimeField(auto_now_add=True, null=True)
+    bookDate = models.DateField(null=True)
+    bookTime = models.TimeField(null=True)
     noPeople = models.CharField(max_length=200, null=True)
     description = models.CharField(max_length=200, null=True)
     def __str__(self):         

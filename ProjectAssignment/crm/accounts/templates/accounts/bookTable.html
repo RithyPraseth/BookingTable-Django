@@ -9,12 +9,11 @@
 
     <div class="container">
 
-        <div class="row g-0" data-aos="fade-up" data-aos-delay="100">
+        <div class="row g-0" data-aos="fade-up" data-aos-delay="100" style="display: flex; justify-content: center;">
 
-            <!-- <div class="col-lg-4 reservation-img" style="background-image: url({% static 'assets/img/reservation.jpg' %});"></div> -->
-
+            <!-- Reservation Form -->
             <div class="col-lg-8 d-flex align-items-center reservation-form-bg" data-aos="fade-up" data-aos-delay="200">
-                <form action="{% url 'book_table' %}" method="post" role="form" class="php-email-form">
+                <form id="bookingForm" action="{% url 'book_table' %}" method="post" role="form" class="php-email-form">
                     {% csrf_token %}
                     <div class="row gy-4">
                         <div class="col-lg-4 col-md-6">
@@ -42,9 +41,6 @@
                     </div>
 
                     <div class="text-center mt-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
                         <button type="submit">Book a Table</button>
                     </div>
                 </form>
@@ -55,3 +51,57 @@
     </div>
 
 </section>
+
+<!-- Include SweetAlert and jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#bookingForm').on('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = $(this);
+            const formData = new FormData(this);
+
+            // Display loading alert
+            Swal.fire({
+                title: 'Processing...',
+                text: 'Please wait while we book your table.',
+                icon: 'info',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            $.ajax({
+                url: form.attr('action'), // Get the form's action URL
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken'),
+                },
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: response.message || 'Your table has been successfully booked.',
+                        icon: 'success',
+                    });
+                    form[0].reset(); // Clear the form
+                },
+                error: function (xhr) {
+                    const errorMessage = xhr.responseJSON?.message || 'An error occurred. Please try again.';
+                    Swal.fire({
+                        title: 'Error!',
+                        text: errorMessage,
+                        icon: 'error',
+                    });
+                },
+            });
+        });
+    });
+</script>
