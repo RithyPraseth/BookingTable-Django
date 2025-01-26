@@ -16,16 +16,20 @@ def customer(request):
 
 def Index(request):
     TopMenu = tblTopMenu.objects.all()
-    SubTopMenu = tblSubTopMenu.objects.all()
-    Sub2TopMenu = tblSub2TopMenu.objects.all()
     category = Category.objects.all()
-    Menu = tblFoodMenu.objects.all()
+    Menu = tblFoodMenu.objects.filter(status='Active')
+    chef = tblChef.objects.all()
+    gallery = tblGallery.objects.all()
+    Slide = tblSlide.objects.all().order_by('order')
+    event = tblEnventCatalog.objects.all()
     context ={
         'TopMenus' : TopMenu,
-        'SubTopMenus' : SubTopMenu,
-        'Sub2TopMenus' : Sub2TopMenu,
         'FoodCategory' : category,
-        'FoodMenu' : Menu        
+        'FoodMenu' : Menu,
+        'Chef' : chef,
+        'Gallery' : gallery,   
+        'slides' : Slide, 
+        'events' : event,   
     }
     return render(request, 'accounts/index.html', context)
     

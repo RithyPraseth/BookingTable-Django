@@ -53,11 +53,11 @@ class tblBookTableAdminForm(forms.ModelForm):
 admin.site.register(Category)
 admin.site.register(tblFoodMenu, ProductAdmin)
 admin.site.register(tblTopMenu)
-admin.site.register(tblSub2TopMenu)
-admin.site.register(tblSubTopMenu)
 admin.site.register(tblAboutUs)
 admin.site.register(tblEnventCatalog, CatalogAdmin)
 admin.site.register(tblSlide)
+admin.site.register(tblChef)
+admin.site.register(tblGallery)
 @admin.register(tblBookTable)
 class tblBookTableAdmin(admin.ModelAdmin):
     form = tblBookTableAdminForm

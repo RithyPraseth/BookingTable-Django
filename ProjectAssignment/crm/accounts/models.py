@@ -4,25 +4,10 @@ from django.db import models
 class tblTopMenu(models.Model):
     topMenuName = models.CharField(max_length=200, null=True)
     topMenuImage = models.CharField(max_length=200, null=True)
+    topMenuLink = models.CharField(max_length=200)
 
-    def str(self):
+    def __str__(self):
         return self.topMenuName
-
-class tblSubTopMenu(models.Model):
-    subTopMenuName = models.CharField(max_length=200, null=True)
-    subTopMenuImage = models.CharField(max_length=200, null=True)
-    TopMenuID = models.ForeignKey(tblTopMenu, on_delete=models.CASCADE, null=True)
-
-    def str(self):
-        return f'{self.subTopMenuName}'  
-
-class tblSub2TopMenu(models.Model):
-    sub2TopMenuName = models.CharField(max_length=200, null=True)
-    sub2TopMenuImage = models.CharField(max_length=200, null=True) 
-    subTopMenuID = models.ForeignKey(tblSubTopMenu, on_delete=models.CASCADE, null=True)
-
-    def str(self):
-        return f'{self.sub2TopMenuName}'
 
 class Category(models.Model):   
     CategoryName = models.CharField(max_length=200, null=True) 
@@ -33,15 +18,24 @@ class Category(models.Model):
         return self.CategoryName 
 
 class tblFoodMenu(models.Model):
+    ACTIVE = 'Active'
+    INACTIVE = 'Inactive'   
+    
+    STATUS_CHOICES = [
+        (ACTIVE, 'Active'),
+        (INACTIVE, 'Inactive'),
+    ]
     foodName = models.CharField(max_length=200, null=True)
     categoryID = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     priceOut = models.CharField(max_length=200, null=True)
     description = models.CharField(max_length=200, null=True)
-    foodImage =  models.ImageField(upload_to ='FoodMenuImages/')
+    foodImage = models.ImageField(upload_to='FoodMenuImages/')
     foodDate = models.DateTimeField(auto_now_add=True, null=True)
-    status = models.CharField(max_length=20, null=True)
-    def __str__(self):         
-        return self.foodName  
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=ACTIVE)
+
+    def __str__(self):
+        return self.foodName
+
     
 class tblAboutUs(models.Model):
     aboutUsName = models.CharField(max_length=200, null=True)
@@ -79,9 +73,28 @@ class tblBookTable(models.Model):
         return self.custName
 
 class tblSlide(models.Model):
-    slideTitle = models.CharField(max_length=200, null=True)
-    slideDescription = models.CharField(max_length=200, null=True)
+    title = models.CharField(max_length=200)
+    description = models.TextField()
     slideImage = models.ImageField(upload_to ='SlideImages/')
-    status = models.IntegerField(null=True)
+    video_url = models.URLField(null=True, blank=True)
+    button_text = models.CharField(max_length=100, default='Book a Table', editable=False)
+    button_link = models.CharField(max_length=200, default='#book-a-table', editable=False)
+    order = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.title
+
+
+class tblChef(models.Model):
+    chefName = models.CharField(max_length=200, null=True)
+    position = models.CharField(max_length=200, null=True)
+    chefDescription = models.CharField(max_length=200, null=True)
+    chefImage = models.ImageField(upload_to ='ChefImages/')
     def __str__(self):         
-        return self.slideTitle
+        return self.chefName
+
+class tblGallery(models.Model):
+    ImageName = models.CharField(max_length=200, null=True)
+    Image = models.ImageField(upload_to ='GalleryImages/')
+    def __str__(self):         
+        return self.ImageName
