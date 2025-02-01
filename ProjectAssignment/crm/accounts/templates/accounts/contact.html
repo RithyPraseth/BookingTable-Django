@@ -16,47 +16,47 @@
       </div><!-- End Google Maps -->
 
       <div class="row gy-4">
-
-        <div class="col-md-6">
-          <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
-            <i class="icon bi bi-geo-alt flex-shrink-0"></i>
-            <div>
-              <h3>Address</h3>
-              <p>Hanoi Street, Phnom Penh, Cambodia</p>
+        {% for contact in contactUs %}
+          <div class="col-md-6">
+            <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="200">
+              <i class="icon bi bi-geo-alt flex-shrink-0"></i>
+              <div>
+                <h3>Address</h3>
+                <p>{{contact.address}}</p>
+              </div>
             </div>
-          </div>
-        </div><!-- End Info Item -->
+          </div><!-- End Info Item -->
 
-        <div class="col-md-6">
-          <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="300">
-            <i class="icon bi bi-telephone flex-shrink-0"></i>
-            <div>
-              <h3>Call Us</h3>
-              <p>+855 12763842</p>
+          <div class="col-md-6">
+            <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="300">
+              <i class="icon bi bi-telephone flex-shrink-0"></i>
+              <div>
+                <h3>Call Us</h3>
+                <p>{{contact.callUs}}</p>
+              </div>
             </div>
-          </div>
-        </div><!-- End Info Item -->
+          </div><!-- End Info Item -->
 
-        <div class="col-md-6">
-          <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="400">
-            <i class="icon bi bi-envelope flex-shrink-0"></i>
-            <div>
-              <h3>Email Us</h3>
-              <p>yummy@gmail.com</p>
+          <div class="col-md-6">
+            <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="400">
+              <i class="icon bi bi-envelope flex-shrink-0"></i>
+              <div>
+                <h3>Email Us</h3>
+                <p>{{contact.emailUs}}</p>
+              </div>
             </div>
-          </div>
-        </div><!-- End Info Item -->
+          </div><!-- End Info Item -->
 
-        <div class="col-md-6">
-          <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="500">
-            <i class="icon bi bi-clock flex-shrink-0"></i>
-            <div>
-              <h3>Opening Hours<br></h3>
-              <p><strong>Mon-Sun:</strong> 7AM - 21PM
+          <div class="col-md-6">
+            <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="500">
+              <i class="icon bi bi-clock flex-shrink-0"></i>
+              <div>
+                <h3>Opening Hours<br></h3>
+                <p><strong>{{contact.openHour}}</strong> 
+              </div>
             </div>
-          </div>
-        </div><!-- End Info Item -->
-
+          </div><!-- End Info Item -->
+        {% endfor %}
       </div>
     </div>
 </section>

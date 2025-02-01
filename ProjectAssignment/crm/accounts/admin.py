@@ -58,6 +58,7 @@ admin.site.register(tblEnventCatalog, CatalogAdmin)
 admin.site.register(tblSlide)
 admin.site.register(tblChef)
 admin.site.register(tblGallery)
+admin.site.register(tblContactUs)
 @admin.register(tblBookTable)
 class tblBookTableAdmin(admin.ModelAdmin):
     form = tblBookTableAdminForm

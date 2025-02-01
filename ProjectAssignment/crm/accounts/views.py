@@ -22,6 +22,7 @@ def Index(request):
     gallery = tblGallery.objects.all()
     Slide = tblSlide.objects.all().order_by('order')
     event = tblEnventCatalog.objects.all()
+    contactUs = tblContactUs.objects.all()
     context ={
         'TopMenus' : TopMenu,
         'FoodCategory' : category,
@@ -30,6 +31,7 @@ def Index(request):
         'Gallery' : gallery,   
         'slides' : Slide, 
         'events' : event,   
+        'contactUs' : contactUs,
     }
     return render(request, 'accounts/index.html', context)
     

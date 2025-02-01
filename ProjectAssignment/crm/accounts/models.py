@@ -1,6 +1,16 @@
 from django.db import models
 
 # Create your models here.
+class tblContactUs(models.Model):
+    address = models.CharField(max_length=200, null=True)
+    callUs = models.CharField(max_length=200, null=True)
+    emailUs = models.CharField(max_length=200, null=True)
+    openHour = models.CharField(max_length=200, null=True)
+    def __str__(self):         
+        return self.address  
+
+
+
 class tblTopMenu(models.Model):
     topMenuName = models.CharField(max_length=200, null=True)
     topMenuImage = models.CharField(max_length=200, null=True)
