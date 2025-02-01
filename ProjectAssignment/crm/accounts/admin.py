@@ -59,6 +59,7 @@ admin.site.register(tblSlide)
 admin.site.register(tblChef)
 admin.site.register(tblGallery)
 admin.site.register(tblContactUs)
+admin.site.register(tblwhyUs)
 @admin.register(tblBookTable)
 class tblBookTableAdmin(admin.ModelAdmin):
     form = tblBookTableAdminForm

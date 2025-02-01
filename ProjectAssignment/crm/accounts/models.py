@@ -8,6 +8,14 @@ class tblContactUs(models.Model):
     openHour = models.CharField(max_length=200, null=True)
     def __str__(self):         
         return self.address  
+    
+class tblwhyUs(models.Model):
+    icon = models.CharField(max_length=200, null=True)
+    title = models.CharField(max_length=200, null=True)
+    description = models.CharField(max_length=200, null=True)
+    def __str__(self):         
+        return self.title  
+
 
 
 
@@ -55,6 +63,7 @@ class tblAboutUs(models.Model):
     advan1 = models.CharField(max_length=200, null=True)
     advan2 = models.CharField(max_length=200, null=True)
     advan3 = models.CharField(max_length=200, null=True)
+    advan4 = models.CharField(max_length=200, null=True)
     description = models.CharField(max_length=200, null=True)
     aboutDate = models.DateTimeField(auto_now_add=True, null=True)
     def __str__(self):         
